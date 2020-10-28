@@ -62,7 +62,7 @@ var fight = function (enemyName) {
                 window.alert("You need to choose a valid option. Try again!");
             }
 
-*/
+        */
         //if player chooses to fight, then fight
         else if (promptFight === "fight" || promptFight === "FIGHT") {
 
@@ -82,7 +82,7 @@ var fight = function (enemyName) {
 
                 //award player money for winning
                 playerMoney = playerMoney + 20;
-                console.log(playerMoney)
+                console.log("playerMoney " + playerMoney)
 
                 //leave while() kiio since enemy is dead
                 break;
@@ -100,14 +100,15 @@ var fight = function (enemyName) {
             //check player's health
             if (playerHealth <= 0) {
                 window.alert(playerName + " has died!");
+
                 // leave while() loop if player is dead
+                // break is commented be cause of the else statement in the function call
                 break;
             } else {
                 window.alert(playerName + " still has " + playerHealth + " health left.");
             }
 
-        }
-        else {
+        } else {
             window.alert("You need to choose a valid option. Try again!");
         }
 
@@ -120,7 +121,25 @@ var fight = function (enemyName) {
 
 for (var i = 0; i < enemyNames.length; i++) {
     //debugger;
-    var pickedEnemyName = enemyNames[i];
-    enemyHealth = 50;
-    fight(enemyNames[i]);
+    if (playerHealth > 0) {
+        // let player know what round they are in, remember that arrays start at 0 so it needs to have a 1 added to it
+        window.alert("Welcome to robot Gladiators! Round " + (i + 1));
+
+        // picked new enemy to fight based on the index of the enemyNames array
+        var pickedEnemyName = enemyNames[i];
+
+        // reset enemyHealth before starting a new fight
+        enemyHealth = 50;
+
+        // use debugger to pause script from running and check what's going on at that moment in the code
+        // debugger;
+
+        //pass the pickedEnemyName variable's value into the fight function, where it will assume the value of the enemyName parameter
+        fight(pickedEnemyName);
+
+    // the else below doesn't work!
+    } else {
+        window.alert("You have lost your robot in the battle! Game Over!");
+        break;
+    }
 }
