@@ -104,10 +104,13 @@ var fightOrSkip = function() {
         if (confirmSkip) {
             alert(playerInfo.name+ " has decided to skip this fight. Goodbye!");
             // subtract money from playerMoney for skipping
-            playerInfo.playerMoney = playerInfo.money - 10;
+            playerInfo.money = Math.max(0, playerInfo.money - 10);
+            return true
             shop();
         }
+
     }
+    return false;
 }
 
 
@@ -117,7 +120,9 @@ var fight = function (enemy) {
     while (enemy.health > 0 && playerInfo.health > 0) {
         // place fight function code block here...
 
-        fightOrSkip();
+        if (fightOrSkip()) {
+            break;
+        };
 
             // generate random damage value based on player's attack power
             var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
